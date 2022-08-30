@@ -12,7 +12,7 @@ const createschedulesController = async (req: Request, res: Response) => {
       hour,
       propertyId,
     });
-    return res.status(201).json({ schedules });
+    return res.status(201).json({ message: schedules });
   } catch (error) {
     if (error instanceof AppError) {
       handleError(error, res);

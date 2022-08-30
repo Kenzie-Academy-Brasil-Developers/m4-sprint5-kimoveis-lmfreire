@@ -6,12 +6,7 @@ import isAdmMiddleware from "../Middlewares/isAdmMiddlewares";
 
 const schedulesRouter = Router();
 
-schedulesRouter.post(
-  "",
-  AuthMiddleware,
-  isAdmMiddleware,
-  createschedulesController
-);
+schedulesRouter.post("", AuthMiddleware, createschedulesController);
 schedulesRouter.get(
   "/properties/:id",
   AuthMiddleware,

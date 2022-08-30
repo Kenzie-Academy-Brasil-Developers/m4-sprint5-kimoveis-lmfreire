@@ -64,9 +64,10 @@ describe("/schedules", () => {
       .post("/schedules")
       .set("Authorization", `Bearer ${userLoginResponse.body.token}`)
       .send(mockedSchedule);
+    console.log("AQUII", response.body);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
+    expect(response.status).toBe(201);
   });
 
   test("POST /schedules -  should not be able to create a schedule that already exists", async () => {
@@ -88,7 +89,7 @@ describe("/schedules", () => {
       .send(mockedSchedule);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
+    expect(response.status).toBe(400);
   });
 
   test("POST /schedules -  should not be able to create a schedule with an invalid date", async () => {
@@ -110,7 +111,7 @@ describe("/schedules", () => {
       .send(mockedScheduleInvalidDate);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
+    expect(response.status).toBe(400);
   });
 
   test("POST /schedules -  should not be able to create a schedule with an invalid hour", async () => {
@@ -132,7 +133,7 @@ describe("/schedules", () => {
       .send(mockedScheduleInvalidHour);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
+    expect(response.status).toBe(400);
   });
 
   test("POST /schedules -  should not be able to create a schedule with an invalid property id", async () => {
@@ -152,7 +153,7 @@ describe("/schedules", () => {
       .send(mockedScheduleInvalidPropertyId);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
+    expect(response.status).toBe(400);
   });
 
   test("POST /schedules -  should not be able to create a schedule without authentication", async () => {
@@ -184,7 +185,7 @@ describe("/schedules", () => {
     expect(response.body.schedules[0]).toHaveProperty("id");
     expect(response.body.schedules[0]).toHaveProperty("date");
     expect(response.body.schedules[0]).toHaveProperty("hour");
-    expect(response.body.schedules[0]).toHaveProperty("user");
+    expect(response.body.schedules[0]).toHaveProperty("users");
     expect(response.body.schedules).toHaveLength(1);
     expect(response.status).toBe(200);
   });
